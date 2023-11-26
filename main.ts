@@ -1,7 +1,7 @@
 import Parser from "./parser.ts";
 import { tokenize } from "./lexer.ts";
 import tablesym from "./tablesym.ts";
-
+import {translatePcode} from "./translate.ts";
 const parser = new Parser();
 
 const input = Deno.readTextFile("./test.src");
@@ -11,4 +11,6 @@ const ast = parser.produceAST(await input);
 
 const allvar = tablesym(ast.body);
 console.log(allvar)
+
+console.log(translatePcode(allvar, ast.body))
 
