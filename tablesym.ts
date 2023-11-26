@@ -11,5 +11,4 @@ const tablesym = (body : Array<any>) : any=> {
     }
     return declarations;
 }
-
 export default tablesym;
