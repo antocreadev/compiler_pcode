@@ -20,7 +20,7 @@ import {
     private not_eof(): boolean {
       return this.tokens[0].type != TokenType.EOF;
     }
-    private isIdentifier(token: Token): token is Identifier {
+    private isIdentifier(token: Token) {
       return token.type === TokenType.Identifier;
     }
   
@@ -61,13 +61,14 @@ import {
         return this.parse_variable_declaration();
       } else if (this.available_token().type === TokenType.Identifier) {
       
+        if (this.isIdentifier(this.available_token())) {
         const identifier = this.previous_token() as unknown as Identifier;
         
     
         if (this.available_token().value === "=") {
           return this.parse_assignment(identifier);
         }
-   
+      }
       } else if (this.available_token().value === "do") {
         return this.parse_do_while_loop();
       }
@@ -269,7 +270,7 @@ import {
           this.previous_token_with_type(
             TokenType.CloseParen,
             "Unexpected token found inside parenthesised expression. Expected closing parenthesis.",
-          ); 
+          ); // closing paren
           return value;
         }
         case TokenType.Read: {
