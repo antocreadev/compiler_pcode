@@ -2,11 +2,6 @@ var b = 0
 do {
     var a = read()
     b = b +a
-    do {
-    var c = read()
-    b = b +a
-}
-while(a!=0)
 }
 while(a!=0)
 write(a)
