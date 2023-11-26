@@ -2,15 +2,16 @@ import Parser from "./parser.ts";
 import { tokenize } from "./lexer.ts";
 import tablesym from "./tablesym.ts";
 import {translatePcode} from "./translate.ts";
+import Stack from "./stack.js";
+import interpreter from "./interpreter.js";
 const parser = new Parser();
-
 const input = Deno.readTextFile("./test.src");
-// console.log(tokenize(await input));
 const ast = parser.produceAST(await input);
-// console.log(JSON.stringify(ast, null, 3))
+const table_sym = tablesym(ast.body);
+const pcode = (translatePcode(await table_sym, ast.body))
+console.log(await pcode)
+const stack = new Stack();
+const result = interpreter(stack, await pcode);
+// console.log(result);
 
-const allvar = tablesym(ast.body);
-console.log(allvar)
-
-console.log(translatePcode(allvar, ast.body))
 
