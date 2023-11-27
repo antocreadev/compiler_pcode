@@ -5,7 +5,7 @@ export type NodeType =
   | "BinaryExpr"
   | "VariableDeclaration"
   | "Assignment"
-  |"DoWhileLoop"
+  | "DoWhileLoop"
   | "NativeFunctionCall";
 
 export interface Stmt {
