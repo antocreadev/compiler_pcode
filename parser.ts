@@ -56,7 +56,6 @@ import {
     }
   
     private parse_stmt(): Stmt {
-      console.log("Parsing statement: ", this.available_token());
       if (this.available_token().value === "var") {
         return this.parse_variable_declaration();
       } else if (this.available_token().type === TokenType.Identifier) {
