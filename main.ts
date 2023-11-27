@@ -1,14 +1,11 @@
-import Parser from "./parser.ts";
-import { tokenize } from "./lexer.ts";
-import tablesym from "./tablesym.ts";
-
-const parser = new Parser();
+import Parser from "./Parser.ts"
+import TableSymbole from "./TableSymbole.ts";
 
 const input = Deno.readTextFile("./test.src");
-// console.log(tokenize(await input));
-const ast = parser.produceAST(await input);
-// console.log(JSON.stringify(ast, null, 3))
 
-const allvar = tablesym(ast.body);
-console.log(allvar)
+const parser = new Parser();
+const ast = parser.produceAST(await input);
+
+const tablesym = new TableSymbole(ast.body);
+console.log(tablesym.generateTableSymbole(ast.body));
 
