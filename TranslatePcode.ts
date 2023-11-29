@@ -54,12 +54,6 @@ export default class TranslatePcode {
 
     private browseBinaryExpr(stmt: BinaryExpr) : void {
 
-        if (this.isNumericLiteral(stmt.left)){
-            this.add_opr("LDI",stmt.left.value)
-        }
-        if (this.isNumericLiteral(stmt.right)){
-            this.add_opr("LDI",stmt.right.value)
-        }
 
         if (this.isIdentifier(stmt.left)){
             this.add_opr("LDA",this.tablesym.indexOf(stmt.left.symbol))
@@ -69,6 +63,15 @@ export default class TranslatePcode {
             this.add_opr("LDA",this.tablesym.indexOf(stmt.right.symbol))
             this.add_opr("LDV")
         }
+
+        if (this.isNumericLiteral(stmt.left)){
+            this.add_opr("LDI",stmt.left.value)
+        }
+        if (this.isNumericLiteral(stmt.right)){
+            this.add_opr("LDI",stmt.right.value)
+        }
+
+
 
         // reucrsive call
         if (this.isBinaryExpr(stmt.left)) {
@@ -97,16 +100,16 @@ export default class TranslatePcode {
                 this.add_opr("NEQ")
             }
             else if (stmt.operator==">"){
-                this.add_opr("LSS")
-            }
-            else if (stmt.operator=="<"){
                 this.add_opr("GTR")
             }
+            else if (stmt.operator=="<"){
+                this.add_opr("LSS")
+            }
             else if (stmt.operator==">="){
-                this.add_opr("LEQ")
+                this.add_opr("GEQ")
             }
             else if (stmt.operator=="<="){
-                this.add_opr("GEQ")
+                this.add_opr("LEQ")
             }
             
         }
@@ -148,12 +151,8 @@ export default class TranslatePcode {
         
     }
 
-   
-
-
-    public generate_pcode(astBody:Array<Stmt>) : void {
+    public browseAst(astBody:Array<Stmt>) : void {
         for (const node of astBody) {
-
             // - VariableDeclaration
             if (this.isVariableDeclaration(node)) {
                 const identifier = node.identifier;
@@ -207,14 +206,19 @@ export default class TranslatePcode {
 
         if (this.isDoWhileLoop(node)) {
             const pointer_for_bze = this.pc;
-            this.generate_pcode(node.body);
+            this.browseAst(node.body);
             if (this.isBinaryExpr(node.condition)) {
                 this.browseBinaryExpr(node.condition)
             }
             this.add_opr("BZE",pointer_for_bze)
-
         }
     }
+    }
+
+    public generate_pcode(astBody:Array<Stmt>) : void {
+        this.add_opr("INT",this.tablesym.length)
+        this.browseAst(astBody)
+        this.add_opr("HLT")
     }
 
 }
