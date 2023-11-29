@@ -1,9 +1,8 @@
 export const interpreter = (stack, pcode) => {
     const historique = []
     let PC = 0; // pointeur d'instruction 
-    console.log(pcode[PC].op);
     while (pcode[PC].op !== "HLT") {
-        console.log(pcode[PC].op);
+      // console.log(pcode[PC].op);
       const operation = pcode[PC].op;
       const argument = pcode[PC].arg;
       switch (operation) {
@@ -22,6 +21,32 @@ export const interpreter = (stack, pcode) => {
         case "ADD":
           stack.add();
           break;
+
+        case "SUB":
+          stack.sub();
+          break;
+        case "MUL":
+          stack.mul();
+          break;
+        case "DIV":
+          stack.div();
+          break;
+        case "NEQ":
+          stack.neq();
+          break;
+        case "GTR":
+          stack.gtr();
+          break;
+        case "LSS":
+          stack.lss();
+          break;
+        case "LEQ":
+          stack.leq();
+          break;
+        case "GEQ":
+          stack.geq();
+          break;
+          
         case "STO":
           stack.sto();
           break;

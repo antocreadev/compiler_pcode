@@ -1,8 +1,7 @@
 var a = 0
 var b = 15
 do {
-    a = read()
+    write(b)
     b = b -1
 }
-while(b<15)
-write(b)
+while(b<0)
