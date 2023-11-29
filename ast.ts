@@ -5,7 +5,7 @@ export type NodeType =
   | "BinaryExpr"
   | "VariableDeclaration"
   | "Assignment"
-  |"DoWhileLoop"
+  | "DoWhileLoop"
   | "NativeFunctionCall";
 
 export interface Stmt {
@@ -42,8 +42,12 @@ export interface VariableDeclaration extends Stmt {
 
 export interface Assignment extends Stmt {
   kind: "Assignment";
-  identifier: Identifier;
+  identifier: ValueIdentifierInAssignment;
   value: Expr;
+}
+export interface ValueIdentifierInAssignment {
+  value : string;
+  type : number;
 }
 
 export interface DoWhileLoop extends Stmt {
