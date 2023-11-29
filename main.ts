@@ -14,4 +14,9 @@ const stack = new Stack();
 const result = interpreter(stack, await pcode);
 // console.log(result);
 
-
+const tablesym = new TableSymbole(ast.body);
+const translatePcode = new TranslatePcode(tablesym.generateTableSymbole(ast.body), ast.body);
+console.log(console.log(JSON.stringify(ast, null, 4)));
+translatePcode.generate_pcode(ast.body);
+console.table(translatePcode.get_tablesym());
+console.table(translatePcode.get_pcode());
