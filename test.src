@@ -1,7 +1,0 @@
-var a = 0
-var b = 15
-do {
-    write(b)
-    b = b -1
-}
-while(b<0)
