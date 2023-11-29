@@ -1,0 +1,11 @@
+var a = 10
+var b = 5
+do {
+    write(a)
+    a = a -1
+    do {
+        write(b)
+        b = b -1
+    }while(b>0)
+    b=5
+}while(a>0)
