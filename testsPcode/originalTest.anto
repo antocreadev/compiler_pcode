@@ -1,0 +1,8 @@
+var a = 0
+var b = 0
+do{
+    a = read()
+    b = b +a
+}
+while(a!=0)
+write(b)

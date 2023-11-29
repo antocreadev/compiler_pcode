@@ -3,7 +3,7 @@ import TableSymbole from "./TableSymbole.ts";
 import TranslatePcode from "./TranslatePcode.ts";
 import interpreter from "./interpreter.ts";
 
-const input = Deno.readTextFile("./test.src");
+const input = Deno.readTextFile("./testsPcode/binaryOpPriorited.anto");
 
 const parser = new SyntaxAnalysis();
 const ast = parser.produceAST(await input);
